@@ -1,9 +1,11 @@
 package com.trustpay.api
 
-import com.trustpay.AccountApi
 import com.trustpay.ApiClient
+import com.trustpay.TransactionApi
 import com.trustpay.listeners.AccountListener
+import com.trustpay.listeners.PaymentListener
 import com.trustpay.models.Model
+import com.trustpay.models.Model.PaymentRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -19,7 +21,7 @@ class Trustpay(private val secretKey:String){
     fun getAccountDetails(phoneNumber:String, listener: AccountListener){
         GlobalScope.launch(Dispatchers.Main){
             try {
-                val account =   apiClient.create(AccountApi::class.java).getAccount(Model.AccountRequest(secretKey, phoneNumber)).await()
+                val account =   apiClient.create(TransactionApi::class.java).getAccount(Model.AccountRequest(secretKey, phoneNumber)).await()
                 listener.onSuccess(account)
             }catch (e:Exception){
                 listener.onError(e.message!!)
@@ -27,8 +29,20 @@ class Trustpay(private val secretKey:String){
         }
     }
 
-     fun pay(){
+    /**
+     * @param paymentRequest
+      */
+    fun pay(payment: PaymentRequest, listener: PaymentListener){
 
-     }
+         GlobalScope.launch(Dispatchers.Main) {
+             try {
+                 apiClient.create(TransactionApi::class.java).transaction(payment).await()
+                 listener.onSuccess()
+             }catch (e:Exception){
+                 listener.onError(error = e.message!!)
+             }
+         }
+
+    }
 
 }
