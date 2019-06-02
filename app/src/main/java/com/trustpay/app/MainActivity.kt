@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun pay() {
         val intent = Intent(this, TransactionActivity::class.java)
+        intent.putExtra("account", "237691131446")
+        intent.putExtra("secret_key", "imCuBo8wb2GmGWw4")
         startActivity(intent)
     }
 
