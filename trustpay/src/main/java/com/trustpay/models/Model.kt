@@ -1,6 +1,7 @@
 package com.trustpay.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 object Model{
     data class Account(val id:String, val name:String)
@@ -24,5 +25,5 @@ object Model{
                                           @SerializedName("description") val description: String?=null)
 
 
-    data class InitiateTransactionResponse(@SerializedName("name") val name:String, val id: String)
+    data class InitiateTransactionResponse(@SerializedName("name") val name:String, val id: String) : Serializable
 }

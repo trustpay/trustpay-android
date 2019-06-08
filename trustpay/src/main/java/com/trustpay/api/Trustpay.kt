@@ -71,7 +71,7 @@ class Trustpay(private val secretKey:String){
         GlobalScope.launch(Dispatchers.Main) {
             try{
                 val response = apiClient.create(TransactionApi::class.java).initiateTransactionAsync(request).await()
-                listener.OnSuccess(response)
+                listener.onSucces(response)
             }catch (http:HttpException){
                 listener.onError(http.code(), http.message())
             }catch (e:Exception){
