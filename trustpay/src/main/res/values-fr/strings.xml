@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TrustpayAndroidLib</string>
+    <string name="app_name">TrustPay</string>
     <string name="required">Obligatoire</string>
     <string name="title">M/Mme.</string>
     <string name="amount">Montant</string>
+    <string name="check_account">Check My Account</string>
 </resources>

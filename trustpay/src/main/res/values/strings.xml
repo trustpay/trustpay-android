@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">TrustpayAndroidLib</string>
-
+    <string name="app_name">TrustPay</string>
     <string name="check_account">Check My Account</string>
     <string name="required">Required</string>
     <string name="title">Mr/Mrs.</string>
