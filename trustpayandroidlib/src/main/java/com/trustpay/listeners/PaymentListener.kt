@@ -2,5 +2,5 @@ package com.trustpay.listeners
 
 interface PaymentListener{
     fun onSuccess()
-    fun onError(error:String)
+    fun onError(status:Int, message: String)
 }

@@ -1,20 +1,28 @@
 package com.trustpay.models
 
+import com.google.gson.annotations.SerializedName
+
 object Model{
     data class Account(val id:String, val name:String)
     data class AccountRequest(val secret_key:String, val phone_number:String)
 
-    data class PaymentRequest(val secret_key: String,
-                                  val id:String,
-                                  val amount:Int,
-                                  val account_pay:String,
-                                  val ref:String,
-                                  val pay_with:String,
-                                  val status_pay:String,
-                                  val message_pay:String ?=null,
-                                  val device:String = "XAF",
-                                  val description:String ?=null,
-                                  val result_test:Boolean = true)
+    data class PaymentRequest(@SerializedName("secret_key") val secretKey: String,
+                              val id:String,
+                              val amount:Int,
+                              @SerializedName("account_pay") val accountPay:String,
+                              @SerializedName("pay_with") val payWith:String,
+                              @SerializedName("status_pay") val statusPay:String,
+                              @SerializedName("message_pay") val messagePay:String ?=null,
+                              @SerializedName("result_test") val resultTest:Boolean = true)
 
     data class TransactionResponse(val message:String)
+
+    data class InitiateTransactionRequest(@SerializedName("secret_key") val secretKey:String,
+                                          @SerializedName("phone_number") val phoneNumber:String,
+                                          @SerializedName("amount") val amount: Int,
+                                          @SerializedName("ref") val ref: String,
+                                          @SerializedName("description") val description: String?=null)
+
+
+    data class InitiateTransactionResponse(@SerializedName("name") val name:String, val id: String)
 }
