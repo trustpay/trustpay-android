@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.trustpay.R
-import com.trustpay.models.Model
+import kotlinx.android.synthetic.main.fragment_pay.view.*
 
 
 /**
@@ -15,14 +15,20 @@ import com.trustpay.models.Model
  *
  */
 class PayFragment : Fragment() {
-    private lateinit var response: Model.InitiateTransactionResponse
+    private lateinit var amount:String
+    private lateinit var id:String
+    private lateinit var name:String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_pay, container, false)
-       // response = arguments!!.getSerializable("response") as Model.InitiateTransactionResponse
+        name = arguments?.getString("name").toString()
+        amount = arguments?.getString("amount").toString()
+        id = arguments?.getString("id").toString()
+        view.tv_name.text = name
+        view.tv_amount.text = amount
         return view
     }
 
