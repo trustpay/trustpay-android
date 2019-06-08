@@ -9,7 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/trustpayandroidlib" />
+            <option value="$PROJECT_DIR$/trustpay" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
