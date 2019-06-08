@@ -21,7 +21,7 @@ class OperatorAdapter: RecyclerView.Adapter<OperatorAdapter.OperatorHolder>() {
 
     override fun onBindViewHolder(holder: OperatorHolder, position: Int) {
         if(position == 1){
-            Picasso.get().load(R.drawable.ic_momo).into(holder.imageOperator)
+            Picasso.get().load(R.drawable.icon_momo).into(holder.imageOperator)
         }
     }
 
