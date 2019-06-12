@@ -25,5 +25,10 @@ object Model{
                                           @SerializedName("description") val description: String?=null)
 
 
-    data class InitiateTransactionResponse(@SerializedName("name") val name:String, val id: String) : Serializable
+    data class InitiateTransactionResponse(@SerializedName("name") val name:String, val id: String,
+                                           @SerializedName("payers") val payers:List<Payer>): Serializable
+
+    data class Payer(@SerializedName("payer_id") val id: String,
+                     @SerializedName("name") val name: String,
+                     @SerializedName("status") val status:Int)
 }

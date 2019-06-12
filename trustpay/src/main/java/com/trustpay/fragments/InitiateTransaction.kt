@@ -52,9 +52,9 @@ class InitiateTransaction : Fragment() {
                 override fun onSucces(response: Model.InitiateTransactionResponse) {
                    val fragment = PayFragment()
                     val bundle = Bundle()
-                    bundle.putString("name", response.name)
-                    bundle.putString("id", response.id)
                     bundle.putString("amount", amount.toString())
+                    bundle.putSerializable("response", response)
+                    fragment.arguments = bundle
                     activity!!.supportFragmentManager.beginTransaction()
                                 .replace(R.id.transaction_container, fragment)
                                 .commit()

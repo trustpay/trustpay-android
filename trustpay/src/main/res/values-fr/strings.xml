@@ -5,4 +5,5 @@
     <string name="title">M/Mme.</string>
     <string name="amount">Montant</string>
     <string name="check_account">Check My Account</string>
+    <string name="valid">valider</string>
 </resources>
