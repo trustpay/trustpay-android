@@ -9,7 +9,6 @@ object Model{
 
     data class PaymentRequest(@SerializedName("secret_key") val secretKey: String,
                               val id:String,
-                              val amount:Int,
                               @SerializedName("account_pay") val accountPay:String,
                               @SerializedName("pay_with") val payWith:String,
                               @SerializedName("status_pay") val statusPay:String?=null,

@@ -60,7 +60,7 @@ class PayFragment : Fragment() {
         }
         else{
             val trustpay = Trustpay(secretKey =secretKey )
-            trustpay.payAsync(Model.PaymentRequest(secretKey,id, amount = amount.toInt(),payWith = payer!!.id, accountPay = getPhoneNumber(edit_phone.text.toString()) ),
+            trustpay.payAsync(Model.PaymentRequest(secretKey,id,payWith = payer!!.id, accountPay = getPhoneNumber(edit_phone.text.toString()) ),
                 object : PaymentListener {
                     override fun onSuccess() {
                         Toast.makeText(context!!, "ok", Toast.LENGTH_SHORT).show()
