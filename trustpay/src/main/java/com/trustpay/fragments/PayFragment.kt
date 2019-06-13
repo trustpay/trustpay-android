@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
@@ -53,24 +54,29 @@ class PayFragment : Fragment() {
     }
 
     private fun btnValidClick(view: View?) {
-        if(edit_phone.text.isNullOrBlank()){
-            edit_phone.error = getString(R.string.required)
-        }else if(edit_phone.text.toString().length != 9){
-            edit_phone.error = getString(R.string.invalid_phone)
+        when {
+            edit_phone.text.isNullOrBlank() -> edit_phone.error = getString(R.string.required)
+            edit_phone.text.toString().length != 9 -> edit_phone.error = getString(R.string.invalid_phone)
+            else -> {
+                loading.visibility = VISIBLE
+                Trustpay(secretKey =secretKey ).payAsync(Model.PaymentRequest(secretKey,id,payWith = payer!!.id, accountPay = getPhoneNumber(edit_phone.text.toString()) ),
+                    object : PaymentListener {
+                        override fun onSuccess() {
+                            Toast.makeText(context!!, "ok", Toast.LENGTH_SHORT).show()
+                            loading.visibility = GONE
+                        }
+    
+                        override fun onError(status: Int, message: String) {
+                            loading.visibility = GONE
+                            showError(view!!,status)
+                        }
+                    })
+            }
         }
-        else{
-            val trustpay = Trustpay(secretKey =secretKey )
-            trustpay.payAsync(Model.PaymentRequest(secretKey,id,payWith = payer!!.id, accountPay = getPhoneNumber(edit_phone.text.toString()) ),
-                object : PaymentListener {
-                    override fun onSuccess() {
-                        Toast.makeText(context!!, "ok", Toast.LENGTH_SHORT).show()
-                    }
+    }
 
-                    override fun onError(status: Int, message: String) {
-                        Toast.makeText(context!!, message, Toast.LENGTH_SHORT).show()
-                    }
-                })
-        }
+    private fun showError(view: View, status: Int) {
+        Toast.makeText(context!!, "", Toast.LENGTH_SHORT).show()
     }
 
     private fun getPhoneNumber(phone: String): String {

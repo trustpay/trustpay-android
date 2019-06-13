@@ -51,10 +51,16 @@ dependencies {
     implementation 'com.hbb20:ccp:2.2.9'
     //picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+    //
+    implementation 'com.github.ybq:Android-SpinKit:1.2.0'
 
 
 
 }
 repositories {
     mavenCentral()
+    jcenter()
+    maven {
+        url 'https://jitpack.io'
+    }
 }
