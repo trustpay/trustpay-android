@@ -58,17 +58,20 @@ class PayFragment : Fragment() {
             edit_phone.text.isNullOrBlank() -> edit_phone.error = getString(R.string.required)
             edit_phone.text.toString().length != 9 -> edit_phone.error = getString(R.string.invalid_phone)
             else -> {
-                loading.visibility = VISIBLE
+                progress_loading.visibility = VISIBLE
+                btn_valid.isEnabled = false
                 Trustpay(secretKey =secretKey ).payAsync(Model.PaymentRequest(secretKey,id,payWith = payer!!.id, accountPay = getPhoneNumber(edit_phone.text.toString()) ),
                     object : PaymentListener {
                         override fun onSuccess() {
                             Toast.makeText(context!!, "ok", Toast.LENGTH_SHORT).show()
-                            loading.visibility = GONE
+                            progress_loading.visibility = GONE
+                            activity!!.finish()
                         }
     
                         override fun onError(status: Int, message: String) {
-                            loading.visibility = GONE
                             showError(view!!,status)
+                            progress_loading.visibility = GONE
+                            btn_valid.isEnabled = true
                         }
                     })
             }
@@ -108,6 +111,9 @@ class PayFragment : Fragment() {
         Picasso.get().load(R.drawable.ic_orange).resize(dimenImage, dimenImage).into(view.image_orange)
         Picasso.get().load(R.drawable.ic_mtn).resize(dimenImage,dimenImage).into(view.image_mtn)
     }
+
+
+
 
 
 }

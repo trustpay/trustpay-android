@@ -23,10 +23,14 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra("secret_key", "imCuBo8wb2GmGWw4")
         intent.putExtra("amount", 500)
         intent.putExtra("ref", "1222")
-        startActivity(intent)
-
+        startActivityForResult(intent, 100)
     }
 
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == 100){
+            Toast.makeText(this, "Transaction Terminée", Toast.LENGTH_SHORT).show()
+        }
+    }
 
 }

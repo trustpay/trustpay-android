@@ -24,4 +24,9 @@ class TransactionActivity : AppCompatActivity() {
 
 
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 }
