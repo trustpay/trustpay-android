@@ -12,7 +12,7 @@ object Model{
                               val amount:Int,
                               @SerializedName("account_pay") val accountPay:String,
                               @SerializedName("pay_with") val payWith:String,
-                              @SerializedName("status_pay") val statusPay:String,
+                              @SerializedName("status_pay") val statusPay:String?=null,
                               @SerializedName("message_pay") val messagePay:String ?=null,
                               @SerializedName("result_test") val resultTest:Boolean = true)
 

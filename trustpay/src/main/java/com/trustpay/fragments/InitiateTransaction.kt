@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import com.trustpay.R
 import com.trustpay.api.Trustpay
@@ -53,6 +54,7 @@ class InitiateTransaction : Fragment() {
                    val fragment = PayFragment()
                     val bundle = Bundle()
                     bundle.putString("amount", amount.toString())
+                    bundle.putString("secretkey",secretKey)
                     bundle.putSerializable("response", response)
                     fragment.arguments = bundle
                     activity!!.supportFragmentManager.beginTransaction()
