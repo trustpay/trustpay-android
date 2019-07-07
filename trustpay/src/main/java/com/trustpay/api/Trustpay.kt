@@ -22,10 +22,10 @@ class Trustpay(private val secretKey:String){
     /**
      * @param phoneNumber
      */
-    fun getAccountDetailsAsync(phoneNumber:String, listener: AccountListener){
-        GlobalScope.launch(Dispatchers.Main){
+    fun getAccountDetails(phoneNumber:String, listener: AccountListener){
+        GlobalScope.launch(Dispatchers.IO){
             try {
-                val account =   apiClient.create(TransactionApi::class.java).getAccountAsync(Model.AccountRequest(secretKey, phoneNumber)).await()
+                val account =   apiClient.create(TransactionApi::class.java).getAccount(Model.AccountRequest(secretKey, phoneNumber))
                 listener.onSuccess(account)
             }catch (e:Exception){
                 listener.onError(e.message!!)
@@ -33,21 +33,16 @@ class Trustpay(private val secretKey:String){
         }
     }
 
-    /**
-     * @param phoneNumber
-     */
-    fun getAccountDetails(phoneNumber: String): Response<Model.Account> {
-        return   apiClient.create(TransactionApi::class.java).getAccount(Model.AccountRequest(secretKey, phoneNumber)).execute()
-    }
+
 
     /**
      * @param paymentRequest
       */
     fun payAsync(payment: PaymentRequest, listener: PaymentListener){
 
-         GlobalScope.launch(Dispatchers.Main) {
+         GlobalScope.launch(Dispatchers.IO) {
              try {
-                 apiClient.create(TransactionApi::class.java).transactionAsync(payment).await()
+                 apiClient.create(TransactionApi::class.java).transaction(payment)
                  listener.onSuccess()
              }catch (http:HttpException){
                  listener.onError(http.code(), http.message())
@@ -59,18 +54,13 @@ class Trustpay(private val secretKey:String){
 
     }
 
-    /**
-     * @param payment
-     */
-    fun pay(payment:PaymentRequest): Response<TransactionResponse> {
-        return apiClient.create(TransactionApi::class.java).transaction(payment).execute()
-    }
+
 
 
     fun initiateTransactionAsync(request:Model.InitiateTransactionRequest, listener:InitiateTransactionListerner){
-        GlobalScope.launch(Dispatchers.Main) {
+        GlobalScope.launch(Dispatchers.IO) {
             try{
-                val response = apiClient.create(TransactionApi::class.java).initiateTransactionAsync(request).await()
+                val response = apiClient.create(TransactionApi::class.java).initiateTransaction(request)
                 listener.onSucces(response)
             }catch (http:HttpException){
                 listener.onError(http.code(), http.message())

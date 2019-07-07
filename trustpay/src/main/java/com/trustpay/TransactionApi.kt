@@ -13,11 +13,14 @@ import retrofit2.http.POST
 interface TransactionApi {
     @POST("check_account")
     fun getAccountAsync(@Body request: AccountRequest):Deferred<Account>
-    fun getAccount(@Body request: AccountRequest): Call<Account>
+    suspend fun getAccount(@Body request: AccountRequest): Account
     @POST("initiate_transaction")
     fun initiateTransactionAsync(@Body request: Model.InitiateTransactionRequest):Deferred<Model.InitiateTransactionResponse>
+    @POST("initiate_transaction")
+    suspend fun initiateTransaction(@Body request: Model.InitiateTransactionRequest):Model.InitiateTransactionResponse
     @POST("transaction")
     fun transactionAsync(@Body request: PaymentRequest):Deferred<TransactionResponse>
-    fun transaction(@Body request: PaymentRequest):Call<TransactionResponse>
+    @POST("transaction")
+    suspend fun transaction(@Body request: PaymentRequest):TransactionResponse
 
 }
