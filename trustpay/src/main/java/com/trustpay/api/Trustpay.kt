@@ -2,17 +2,17 @@ package com.trustpay.api
 
 import com.trustpay.ApiClient
 import com.trustpay.TransactionApi
-import com.trustpay.listeners.AccountListener
-import com.trustpay.listeners.InitiateTransactionListerner
-import com.trustpay.listeners.PaymentListener
+import com.trustpay.listeners.*
+import com.trustpay.models.CheckAccount
+import com.trustpay.models.Initiate
 import com.trustpay.models.Model
 import com.trustpay.models.Model.PaymentRequest
-import com.trustpay.models.Model.TransactionResponse
+import com.trustpay.models.Pay
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.HttpException
-import retrofit2.Response
 
 /**
  * @author Gildas Tema <gildastema3@gmail.com>
@@ -68,6 +68,49 @@ class Trustpay(private val secretKey:String){
                 listener.onError(500, e.message!!)
             }
         }
+    }
+
+
+    suspend fun initiate(amount:Int, ref:String, listener:InitiateListener){
+        var response:Initiate.InitiateResponse ?= null
+        try {
+            withContext(Dispatchers.IO){
+               response = apiClient.create(TransactionApi::class.java).initiate(Initiate.InitiateRequest(secretKey, amount, ref))
+            }
+            listener.onSuccess(response!!)
+        }catch (http:HttpException){
+            listener.onError(http.code(), http.message())
+        }catch (e:Exception){
+            listener.onError(500, e.message!!)
+        }
+    }
+
+    suspend fun checkAccount(key:String, phoneNumber:String, listener:CheckAccountListener){
+        var response:CheckAccount.CheckAccountResponse ?=null
+        try {
+            withContext(Dispatchers.IO){
+                response = apiClient.create(TransactionApi::class.java).checkAccount(CheckAccount.CheckAccountRequest(key, phoneNumber))
+            }
+            listener.onSuccess(response!!)
+        }catch (http:HttpException){
+            listener.onError(http.code(), http.message())
+        }catch (e:Exception){
+            listener.onError(500, e.message!!)
+        }
+    }
+
+    suspend fun pay(key:String, payer:String, listener:PayListener){
+        try {
+            withContext(Dispatchers.IO){
+                apiClient.create(TransactionApi::class.java).pay(Pay.PayRequest(key, payer))
+            }
+            listener.onSuccess()
+        }catch (http:HttpException){
+            listener.onError(http.code(), http.message())
+        }catch (e:Exception){
+            listener.onError(500, e.message!!)
+        }
+
     }
 
 

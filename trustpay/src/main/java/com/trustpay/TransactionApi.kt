@@ -1,10 +1,13 @@
 package com.trustpay
 
+import com.trustpay.models.CheckAccount
+import com.trustpay.models.Initiate
 import com.trustpay.models.Model
 import com.trustpay.models.Model.Account
 import com.trustpay.models.Model.AccountRequest
 import com.trustpay.models.Model.PaymentRequest
 import com.trustpay.models.Model.TransactionResponse
+import com.trustpay.models.Pay
 import kotlinx.coroutines.Deferred
 import retrofit2.Call
 import retrofit2.http.Body
@@ -22,5 +25,13 @@ interface TransactionApi {
     fun transactionAsync(@Body request: PaymentRequest):Deferred<TransactionResponse>
     @POST("transaction")
     suspend fun transaction(@Body request: PaymentRequest):TransactionResponse
+
+
+    @POST("initiate")
+    fun initiate(@Body request:Initiate.InitiateRequest): Initiate.InitiateResponse
+
+    fun checkAccount(@Body request:CheckAccount.CheckAccountRequest): CheckAccount.CheckAccountResponse
+
+    fun pay(@Body request:Pay.PayRequest): Void
 
 }
