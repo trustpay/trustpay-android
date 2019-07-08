@@ -29,9 +29,7 @@ interface TransactionApi {
 
     @POST("initiate")
     fun initiate(@Body request:Initiate.InitiateRequest): Initiate.InitiateResponse
-
     fun checkAccount(@Body request:CheckAccount.CheckAccountRequest): CheckAccount.CheckAccountResponse
-
     fun pay(@Body request:Pay.PayRequest): Void
 
 }
