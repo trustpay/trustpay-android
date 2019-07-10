@@ -60,20 +60,20 @@ class PayFragment : Fragment() {
             else -> {
                 progress_loading.visibility = VISIBLE
                 btn_valid.isEnabled = false
-                Trustpay(secretKey =secretKey ).payAsync(Model.PaymentRequest(secretKey,id,payWith = payer!!.id, accountPay = getPhoneNumber(edit_phone.text.toString()) ),
-                    object : PaymentListener {
-                        override fun onSuccess() {
-                            Toast.makeText(context!!, "ok", Toast.LENGTH_SHORT).show()
-                            progress_loading.visibility = GONE
-                            activity!!.finish()
-                        }
-    
-                        override fun onError(status: Int, message: String) {
-                            showError(view!!,status)
-                            progress_loading.visibility = GONE
-                            btn_valid.isEnabled = true
-                        }
-                    })
+//                Trustpay(secretKey =secretKey ).payAsync(Model.PaymentRequest(secretKey,id,payWith = payer!!.id, accountPay = getPhoneNumber(edit_phone.text.toString()) ),
+//                    object : PaymentListener {
+//                        override fun onSuccess() {
+//                            Toast.makeText(context!!, "ok", Toast.LENGTH_SHORT).show()
+//                            progress_loading.visibility = GONE
+//                            activity!!.finish()
+//                        }
+//
+//                        override fun onError(status: Int, message: String) {
+//                            showError(view!!,status)
+//                            progress_loading.visibility = GONE
+//                            btn_valid.isEnabled = true
+//                        }
+//                    })
             }
         }
     }

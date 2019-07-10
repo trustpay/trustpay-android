@@ -22,7 +22,6 @@ import kotlinx.android.synthetic.main.fragment_check_account.view.*
  */
 class CheckAccountFragment : Fragment() {
 
-    private lateinit var secretKey:String
     private lateinit var trustpay: Trustpay
     private val TAG = CheckAccountFragment::class.java.simpleName
     override fun onCreateView(
@@ -30,8 +29,7 @@ class CheckAccountFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // init var
-        secretKey = arguments?.getString("secret_key")!!
-        trustpay = Trustpay(secretKey)
+        trustpay = arguments?.getSerializable("trustpay")!! as Trustpay
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_check_account, container, false)
         view.btn_check_account.setOnClickListener {
@@ -44,16 +42,7 @@ class CheckAccountFragment : Fragment() {
         if(edit_account.text.isNullOrBlank()){
             edit_account.error = getString(R.string.required)
         }else{
-            trustpay.getAccountDetailsAsync(edit_account.text.toString(), object :AccountListener{
-                override fun onSuccess(account: Model.Account) {
-                    Log.i(TAG, account.toString())
-                }
 
-                override fun onError(error: String) {
-                    Log.e(TAG, error)
-                }
-
-            })
         }
     }
 
