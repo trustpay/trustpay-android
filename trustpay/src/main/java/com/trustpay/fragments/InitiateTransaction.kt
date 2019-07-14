@@ -37,7 +37,7 @@ class InitiateTransaction : Fragment() {
         trustpay.initiate(object :  InitiateListener{
             override fun onSuccess(response: Initiate.InitiateResponse) {
                 trustpay.key = response.key
-                openCheckAccount()
+              //  openCheckAccount()
             }
 
             override fun onError(statusCode: Int, message: String) {
@@ -50,8 +50,6 @@ class InitiateTransaction : Fragment() {
 
     override fun onStart() {
         super.onStart()
-
-
     }
 
     private fun openCheckAccount(){

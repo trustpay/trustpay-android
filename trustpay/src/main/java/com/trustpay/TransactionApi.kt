@@ -9,7 +9,6 @@ import com.trustpay.models.Model.PaymentRequest
 import com.trustpay.models.Model.TransactionResponse
 import com.trustpay.models.Pay
 import kotlinx.coroutines.Deferred
-import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
 

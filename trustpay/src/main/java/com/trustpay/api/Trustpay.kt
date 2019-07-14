@@ -32,7 +32,7 @@ class Trustpay(private val secretKey:String, private val amount:Int, private val
         }catch (http:HttpException){
             listener.onError(http.code(), http.message())
         }catch (e:Exception){
-            listener.onError(500, e.message!!)
+            listener.onError(500,"")
         }
     }
 
@@ -40,7 +40,8 @@ class Trustpay(private val secretKey:String, private val amount:Int, private val
         var response:CheckAccount.CheckAccountResponse ?=null
         try {
             GlobalScope.launch(Dispatchers.IO){
-                response = apiClient.create(TransactionApi::class.java).checkAccount(CheckAccount.CheckAccountRequest(key, phoneNumber))
+                response = apiClient.create(TransactionApi::class.java)
+                    .checkAccount(CheckAccount.CheckAccountRequest(key, phoneNumber))
             }
             listener.onSuccess(response!!)
         }catch (http:HttpException){
