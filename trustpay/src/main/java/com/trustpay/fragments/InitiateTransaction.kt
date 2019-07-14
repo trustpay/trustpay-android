@@ -33,15 +33,17 @@ class InitiateTransaction : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_initiate_transaction, container, false)
         trustpay = arguments?.getSerializable("trustpay")!! as Trustpay
-
+        Log.i(TAG, "Hi")
         trustpay.initiate(object :  InitiateListener{
+
             override fun onSuccess(response: Initiate.InitiateResponse) {
                 trustpay.key = response.key
-              //  openCheckAccount()
+                openCheckAccount()
             }
 
             override fun onError(statusCode: Int, message: String) {
-             //   Toast.makeText(context!!, message, Toast.LENGTH_SHORT).show()
+                Log.i(TAG, message)
+               showError(message, view)
             }
 
         })
@@ -57,7 +59,12 @@ class InitiateTransaction : Fragment() {
         val bundle = Bundle()
         bundle.putSerializable("trustpay", trustpay)
         fragment.arguments = bundle
-        activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.transaction_container, fragment)
+        activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.transaction_container, fragment)?.commit()
+    }
+
+    private fun showError(message:String, view: View){
+        Toast.makeText(context!!, message, Toast.LENGTH_SHORT).show()
+        activity?.finish()
     }
 
 

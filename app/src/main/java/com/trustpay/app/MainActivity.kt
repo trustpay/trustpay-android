@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     private fun pay() {
         val intent = Intent(this, TransactionActivity::class.java)
         intent.putExtra("account", "237691133461")
-        intent.putExtra("secret_key", "imCuBo8wb2GmGWw4")
+        intent.putExtra("secret_key", "r2ATPELJSY3mpR8C")
         intent.putExtra("amount", 500)
         intent.putExtra("ref", "1222")
         startActivityForResult(intent, 100)

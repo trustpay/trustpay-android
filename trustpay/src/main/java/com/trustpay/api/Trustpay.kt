@@ -23,17 +23,29 @@ class Trustpay(private val secretKey:String, private val amount:Int, private val
      lateinit var phoneNumber: String
 
      fun initiate( listener:InitiateListener){
-        var response:Initiate.InitiateResponse ?= null
-        try {
-            GlobalScope.launch(Dispatchers.IO){
-               response = apiClient.create(TransactionApi::class.java).initiate(Initiate.InitiateRequest(secretKey, amount, reference))
-            }
-            listener.onSuccess(response!!)
-        }catch (http:HttpException){
-            listener.onError(http.code(), http.message())
-        }catch (e:Exception){
-            listener.onError(500,"")
-        }
+         GlobalScope.launch(Dispatchers.IO){
+             try{
+                val  response = apiClient.create(TransactionApi::class.java).initiate(Initiate.InitiateRequest(secretKey, amount, reference)).await()
+                 withContext(Dispatchers.Main){
+                     listener.onSuccess(response)
+
+                 }
+
+             }catch (http:HttpException){
+                 withContext(Dispatchers.Main){
+                     listener.onError(http.code(), http.message())
+
+                 }
+             }catch (e:Exception){
+                 withContext(Dispatchers.Main){
+                     listener.onError(500,e.message.toString())
+                 }
+             }
+         }
+
+
+
+
     }
 
      fun checkAccount(listener:CheckAccountListener){
@@ -41,7 +53,7 @@ class Trustpay(private val secretKey:String, private val amount:Int, private val
         try {
             GlobalScope.launch(Dispatchers.IO){
                 response = apiClient.create(TransactionApi::class.java)
-                    .checkAccount(CheckAccount.CheckAccountRequest(key, phoneNumber))
+                    .checkAccount(CheckAccount.CheckAccountRequest(key, phoneNumber)).await()
             }
             listener.onSuccess(response!!)
         }catch (http:HttpException){
