@@ -9,7 +9,6 @@ import com.trustpay.models.Model.PaymentRequest
 import com.trustpay.models.Model.TransactionResponse
 import com.trustpay.models.Pay
 import kotlinx.coroutines.Deferred
-import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -28,10 +27,10 @@ interface TransactionApi {
 
 
     @POST("initiate")
-     fun initiate(@Body request:Initiate.InitiateRequest):Deferred<Initiate.InitiateResponse>
+    fun initiate(@Body request:Initiate.InitiateRequest):Deferred<Initiate.InitiateResponse>
     @POST("check_account")
-    suspend fun checkAccount(@Body request:CheckAccount.CheckAccountRequest): Deferred<CheckAccount.CheckAccountResponse>
+    fun checkAccount(@Body request:CheckAccount.CheckAccountRequest): Deferred<CheckAccount.CheckAccountResponse>
     @POST("pay")
-    suspend fun pay(@Body request:Pay.PayRequest): Deferred<Void>
+    fun pay(@Body request:Pay.PayRequest): Deferred<Void>
 
 }

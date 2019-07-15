@@ -6,4 +6,7 @@
     <string name="amount">Amount</string>
     <string name="valid">valider</string>
     <string name="invalid_phone">Invalid PhoneNumber</string>
+    <string name="message_ask_pay">You want to make a pay </string>
+    <string name="message_ask_account">Entrez votre compte</string>
+
 </resources>

@@ -7,4 +7,6 @@
     <string name="check_account">Check My Account</string>
     <string name="valid">valider</string>
     <string name="invalid_phone">Invalid PhoneNumber</string>
+    <string name="message_ask_pay">Vous voulez effectuer un paiement de  </string>
+    <string name="message_ask_account">Entrez votre compte</string>
 </resources>

@@ -18,9 +18,10 @@ import java.io.Serializable
  */
 class Trustpay(private val secretKey:String, private val amount:Int, private val reference:String): Serializable {
     private val apiClient = ApiClient.get()
-
      lateinit var key: String
      lateinit var phoneNumber: String
+     lateinit var name:String
+     lateinit var payers:List<CheckAccount.Payer>
 
      fun initiate( listener:InitiateListener){
          GlobalScope.launch(Dispatchers.IO){
@@ -42,28 +43,31 @@ class Trustpay(private val secretKey:String, private val amount:Int, private val
                  }
              }
          }
-
-
-
-
     }
 
      fun checkAccount(listener:CheckAccountListener){
-        var response:CheckAccount.CheckAccountResponse ?=null
-        try {
-            GlobalScope.launch(Dispatchers.IO){
-                response = apiClient.create(TransactionApi::class.java)
-                    .checkAccount(CheckAccount.CheckAccountRequest(key, phoneNumber)).await()
-            }
-            listener.onSuccess(response!!)
-        }catch (http:HttpException){
-            listener.onError(http.code(), http.message())
-        }catch (e:Exception){
-            listener.onError(500, e.message!!)
-        }
+         GlobalScope.launch(Dispatchers.IO){
+                try {
+                    val response = apiClient.create(TransactionApi::class.java)
+                        .checkAccount(CheckAccount.CheckAccountRequest(key, phoneNumber)).await()
+                    withContext(Dispatchers.Main){
+                        listener.onSuccess(response)
+                    }
+                }catch (http:HttpException){
+                    withContext(Dispatchers.Main){
+                        listener.onError(http.code(), http.message())
+                    }
+
+                }catch (e:Exception){
+                    withContext(Dispatchers.Main){
+                        listener.onError(500, e.message!!)
+                    }
+                }
+         }
     }
 
      fun pay(payer:String, listener:PayListener){
+
         try {
             GlobalScope.launch(Dispatchers.IO){
                 apiClient.create(TransactionApi::class.java).pay(Pay.PayRequest(key, payer))
@@ -75,6 +79,9 @@ class Trustpay(private val secretKey:String, private val amount:Int, private val
             listener.onError(500, e.message!!)
         }
 
+    }
+    fun getAmount() : Int{
+        return this.amount
     }
 
 
