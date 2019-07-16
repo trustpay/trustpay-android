@@ -40,7 +40,7 @@ class CheckAccountFragment : Fragment() {
         view.btn_check_account.setOnClickListener {
             btnCheckAccountClick(view)
         }
-        view.text_amount.text = trustpay.getAmount().toString()
+        view.text_amount.text = String.format("%s XAF", trustpay.getAmount().toString())
         return view
     }
 

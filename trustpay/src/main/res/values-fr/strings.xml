@@ -9,4 +9,6 @@
     <string name="invalid_phone">Invalid PhoneNumber</string>
     <string name="message_ask_pay">Vous voulez effectuer un paiement de  </string>
     <string name="message_ask_account">Entrez votre compte</string>
+    <string name="account">Numero</string>
+    <string name="submit">Valider</string>
 </resources>
