@@ -20,9 +20,10 @@ class MainActivity : AppCompatActivity() {
     private fun pay() {
         val intent = Intent(this, TransactionActivity::class.java)
         intent.putExtra("account", "237691133461")
-        intent.putExtra("secret_key", "imCuBo8wb2GmGWw4")
+        intent.putExtra("secret_key", "EffAFlmUb7JULIrR")
         intent.putExtra("amount", 500)
         intent.putExtra("ref", "1222")
+        intent.putExtra("delay", "60") // 60 min
         startActivityForResult(intent, 100)
     }
 

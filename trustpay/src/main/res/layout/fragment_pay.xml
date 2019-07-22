@@ -16,22 +16,23 @@
                 android:layout_marginRight="8dp" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.183"
-                app:layout_constraintVertical_bias="0.129" android:typeface="normal" android:textSize="18sp"
-                android:textStyle="bold"/>
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.024"
+                app:layout_constraintVertical_bias="0.078" android:typeface="normal" android:textSize="18sp"
+        />
         <TextView
                 android:text="Jon Doe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_name" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                android:id="@+id/tv_name"
+                android:textSize="18sp" android:typeface="sans"
+                app:layout_constraintStart_toEndOf="@+id/tv" android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginRight="8dp" android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
-                app:layout_constraintHorizontal_bias="0.462" app:layout_constraintVertical_bias="0.128"
-                android:textStyle="bold" android:textSize="18sp"/>
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.08"
+                app:layout_constraintVertical_bias="0.078"/>
         <TextView
-                android:text="500 XAF"
+                android:text="100 XAF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_amount" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
@@ -39,8 +40,8 @@
                 android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintVertical_bias="0.288" app:layout_constraintHorizontal_bias="0.476"
-                android:textSize="18sp" android:textAllCaps="true" android:textStyle="bold|italic"/>
+                app:layout_constraintVertical_bias="0.227" app:layout_constraintHorizontal_bias="0.463"
+                android:textSize="18sp" android:textAllCaps="false"/>
         <TextView
                 android:text="Vous etes sur le point de faire un paiement de :"
                 android:layout_width="wrap_content"
@@ -50,8 +51,8 @@
                 app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
-                app:layout_constraintHorizontal_bias="0.245" app:layout_constraintVertical_bias="0.205"
-                android:textStyle="bold" android:textSize="18sp"/>
+                app:layout_constraintHorizontal_bias="0.363" app:layout_constraintVertical_bias="0.163"
+                android:textSize="18sp"/>
         <TextView
                 android:text="Choisir votre mode de paiement"
                 android:layout_width="wrap_content"
@@ -60,94 +61,105 @@
                 android:layout_marginRight="8dp" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
-                app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.405"
-                app:layout_constraintVertical_bias="0.353" android:textSize="18sp" android:textStyle="bold"/>
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.404"
+                app:layout_constraintVertical_bias="0.287" android:textSize="18sp"/>
         <android.support.v7.widget.CardView
-                android:visibility="gone"
-                android:layout_width="396dp"
-                android:layout_height="175dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.97" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+                android:layout_width="399dp"
+                android:layout_height="205dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="1.0"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp" app:layout_constraintHorizontal_bias="1.0"
-                android:id="@+id/card_phone">
+                android:layout_marginRight="8dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+                app:layout_constraintHorizontal_bias="0.0" android:id="@+id/cardView">
             <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                <LinearLayout android:layout_width="match_parent"
-                              android:gravity="center_vertical"
-                              android:layout_height="65dp" app:layout_constraintBottom_toBottomOf="parent"
-                              android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
-                              app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
-                              android:layout_marginStart="16dp" app:layout_constraintVertical_bias="0.049"
-                              android:id="@+id/linearLayout">
-                    <com.hbb20.CountryCodePicker
-                            android:id="@+id/ccp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:ccp_countryPreference="cm"
-                            app:ccp_clickable="false"
-                            app:ccp_defaultNameCode="CM"
-                            app:ccp_hintExampleNumber="true"
-                    />
 
-                    <EditText
-                            android:id="@+id/edit_phone"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="phone"
-                            android:inputType="phone"
-                            android:singleLine="true" android:layout_centerVertical="true"/>
-                </LinearLayout>
+                <EditText
+                        android:layout_width="356dp"
+                        android:layout_height="57dp"
+                        android:inputType="phone"
+                        android:ems="10"
+                        android:id="@+id/edit_account" android:layout_marginBottom="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="8dp"
+                        app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+                        android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginRight="8dp" app:layout_constraintHorizontal_bias="0.481"
+                        app:layout_constraintVertical_bias="0.136"/>
                 <Button
-                        android:text="@string/valid"
-                        android:layout_width="134dp"
-                        android:layout_height="39dp"
+                        android:text="@string/submit"
                         android:textColor="@color/white"
                         android:background="@drawable/btn_round"
-                        android:id="@+id/btn_valid" app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_width="133dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/btn_pay" app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
                         app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
                         android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
                         app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toTopOf="@+id/linearLayout"
-                        app:layout_constraintVertical_bias="0.918"/>
-                <ProgressBar
-                        style="?android:attr/progressBarStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/progress_loading" android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/edit_account"/>
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+                android:layout_width="392dp"
+                android:layout_height="128dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/cardView" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.97" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp" android:id="@+id/cardView2">
+            <android.support.constraint.ConstraintLayout
+                    android:layout_width="403dp"
+                    android:layout_height="139dp">
+
+                <ImageView
+                        android:src="@drawable/ic_orange"
+                        android:layout_width="116dp"
+                        android:layout_height="67dp"
+                        android:id="@+id/ic_orange" android:layout_marginTop="8dp"
                         app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
                         app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
                         app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp" app:layout_constraintHorizontal_bias="0.906"
-                        app:layout_constraintVertical_bias="0.81" android:visibility="gone"/>
+                        android:layout_marginRight="8dp" app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintVertical_bias="0.464"/>
+                <ImageView
+                        android:src="@drawable/ic_mtn"
+                        android:layout_width="98dp"
+                        android:layout_height="66dp"
+                        android:id="@+id/ic_mtn" android:layout_marginEnd="8dp"
+                        app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp"
+                        app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.498"
+                        app:layout_constraintVertical_bias="0.456"/>
+                <ImageView
+                        android:src="@drawable/ic_card"
+                        android:layout_width="82dp"
+                        android:layout_height="64dp"
+                        android:id="@+id/ic_card"
+                        app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp" app:layout_constraintStart_toEndOf="@+id/ic_mtn"
+                        android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+                        app:layout_constraintHorizontal_bias="0.49" app:layout_constraintVertical_bias="0.44"/>
             </android.support.constraint.ConstraintLayout>
         </android.support.v7.widget.CardView>
-        <ImageView
-                android:layout_width="130dp"
-                android:layout_height="130dp" tools:src="@tools:sample/avatars"
-                android:id="@+id/image_orange" android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
-                app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.562"
-                android:layout_marginStart="36dp" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="36dp" android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp"
-                app:layout_constraintHorizontal_bias="0.163"/>
-        <ImageView
-                android:layout_width="130dp"
-                android:layout_height="130dp" tools:src="@tools:sample/avatars"
-                android:id="@+id/image_mtn"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.82"
-                android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.562"/>
+        <ProgressBar
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/pay_loader" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginTop="276dp"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toTopOf="@+id/cardView2"
+                app:layout_constraintHorizontal_bias="0.498" android:visibility="gone"/>
 
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>
