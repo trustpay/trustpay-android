@@ -1,11 +1,9 @@
 package com.trustpay.fragments
 
 
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -17,7 +15,6 @@ import com.squareup.picasso.Picasso
 import com.trustpay.R
 import com.trustpay.api.Trustpay
 import com.trustpay.listeners.PaymentListener
-import com.trustpay.models.Model
 import kotlinx.android.synthetic.main.fragment_pay.*
 import kotlinx.android.synthetic.main.fragment_pay.view.*
 
@@ -30,7 +27,7 @@ class PayFragment : Fragment() {
 
     private val TAG = PayFragment::class.java.simpleName
     private lateinit var trustpay: Trustpay
-    private lateinit var payerId:String
+    private  var payerId:String?=null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,7 +39,32 @@ class PayFragment : Fragment() {
         view.tv_amount.text = String.format("%s XAF",trustpay.getAmount().toString() )
         view.ic_orange.setOnClickListener { pickOrnage() }
         view.ic_mtn.setOnClickListener { pickMtn() }
+        view.btn_pay.setOnClickListener { btnPayClick(it) }
         return view
+    }
+
+    private fun btnPayClick(view: View?) {
+
+        if(payerId == null){
+            Toast.makeText(context!!, "Veuillez selectionnez un mode de paiement", Toast.LENGTH_SHORT).show()
+        }else{
+            btn_pay.isEnabled = false
+            pay_loader.visibility = VISIBLE
+            trustpay.pay(payerId!!, object : PaymentListener {
+                override fun onSuccess() {
+                    pay_loader.visibility = GONE
+                    Toast.makeText(context!!, "OK", Toast.LENGTH_SHORT).show()
+                    activity?.finish()
+                }
+
+                override fun onError(status: Int, message: String) {
+                    pay_loader.visibility = GONE
+                    Toast.makeText(context!!, message, Toast.LENGTH_SHORT).show()
+                    activity?.finish()
+                }
+            })
+        }
+
     }
 
     /**

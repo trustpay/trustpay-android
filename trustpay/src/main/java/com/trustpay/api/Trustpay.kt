@@ -66,18 +66,27 @@ class Trustpay(private val secretKey:String, private val amount:Int, private val
          }
     }
 
-     fun pay(payer:String, listener:PayListener){
+     fun pay(payer:String, listener: PaymentListener){
+         GlobalScope.launch(Dispatchers.IO) {
+             try {
+                 apiClient.create(TransactionApi::class.java)
+                            .pay(Pay.PayRequest(key, payer)).await()
+                 withContext(Dispatchers.Main){
+                     listener.onSuccess()
+                 }
+             }catch (http:HttpException){
+                 withContext(Dispatchers.Main){
+                     listener.onError(http.code(), http.message())
+                 }
+             }catch (e:Exception){
+                 withContext(Dispatchers.Main){
+                     listener.onError(500, e.message!!)
+                 }
 
-        try {
-            GlobalScope.launch(Dispatchers.IO){
-                apiClient.create(TransactionApi::class.java).pay(Pay.PayRequest(key, payer))
-            }
-            listener.onSuccess()
-        }catch (http:HttpException){
-            listener.onError(http.code(), http.message())
-        }catch (e:Exception){
-            listener.onError(500, e.message!!)
-        }
+             }
+         }
+
+
 
     }
     fun getAmount() : Int{
